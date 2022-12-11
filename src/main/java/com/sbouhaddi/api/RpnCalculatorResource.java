@@ -24,6 +24,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import com.sbouhaddi.model.RpnStack;
+import com.sbouhaddi.validation.OperandValidation;
 
 @Path("/rpn")
 @Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +88,7 @@ public class RpnCalculatorResource {
 	@APIResponse(responseCode = "204", description = "Stack updated", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.OBJECT, implementation = RpnStack.class)))
 	@APIResponse(responseCode = "400", description = "Invalid Stack", content = @Content(mediaType = MediaType.APPLICATION_JSON))
 	@APIResponse(responseCode = "404", description = "No Stack found for id provided", content = @Content(mediaType = MediaType.APPLICATION_JSON))
-	public Response applyOperationtoStack(@Parameter(name = "op", required = true) @PathParam("op") String op,
+	public Response applyOperationtoStack(@Parameter(name = "op", required = true) @NotNull @OperandValidation @PathParam("op") String op,
 			@Parameter(name = "id", required = true) @PathParam("id") Long id) {
 		RpnStack rpnStack = RpnStack.findById(id);
 		if (rpnStack != null) {

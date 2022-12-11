@@ -20,7 +20,7 @@ http://localhost:8081/q/openapi?format=json
 
 
 ## Things to improve
-- Validation 
+- Validation (I only implemented one)
 - Exceptions Handling
 
 
